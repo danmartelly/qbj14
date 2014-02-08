@@ -6,7 +6,8 @@ package
 	
 	public class RandoSprite extends FlxSprite
 	{
-		private const randoReactDistance:Number = 150;
+		[Embed(source="../assets/rando.png")] public static var randoImg:Class;
+		private const randoReactDistance:Number = 300;
 		private const playerReactDistance:Number = 60;
 		private const ambleSpeed:Number = 20;
 		private const changeWalkDirectionRate = 4;
@@ -26,7 +27,7 @@ package
 		
 		public function RandoSprite(id:Number, state:PeopleState) 
 		{
-			super(50 + FlxG.random()*10, 50+ FlxG.random()*10);
+			super(50 + FlxG.random()*100, 50+ FlxG.random()*100,randoImg);
 			this.state = state;
 			dialogArray = allDialogs[id];
 		}

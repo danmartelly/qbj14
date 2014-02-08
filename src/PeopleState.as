@@ -80,7 +80,7 @@ package
 				if (activeRando.alreadyTalkedTo) {
 					dialog.text = "You have talked to this person today already.";
 				} else {
-					dialog.text = "Press E to talk to this person.";
+					dialog.text = "Press SPACE to talk to this person.";
 					if (FlxG.keys.justPressed("E") || FlxG.keys.justPressed("SPACE")) {
 						activeRando.active = false; // freeze the rando in place
 						player.active = false; // and the player

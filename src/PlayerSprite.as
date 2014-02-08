@@ -4,16 +4,17 @@ package
 	
 	public class PlayerSprite extends FlxSprite
 	{
+		[Embed(source="../assets/player.png")] public static var playerImg:Class;
 		
 		
 		
 		public function PlayerSprite() 
 		{
-			super();
-			maxVelocity.x = 80;
-			maxVelocity.y = 80;
+			super(0,0,playerImg);
+			maxVelocity.x = 200;
+			maxVelocity.y = 200;
 			drag.x = maxVelocity.x * 4;
-			drag.y = maxVelocity.y*4;
+			drag.y = maxVelocity.y * 4;
 		}
 		
 		override public function update():void {

@@ -12,6 +12,7 @@ package
 		override public function update():void {
 			if (FlxG.keys.any()) {
 				FlxG.switchState(new SlotState());
+				//FlxG.switchState(new PeopleState());
 			}
 		}
 	}
