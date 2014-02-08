@@ -2,7 +2,7 @@ package
 {
 	import org.flixel.*;
 	
-	public class PlayState extends FlxState
+	public class StartState extends FlxState
 	{
 		override public function create():void
 		{
