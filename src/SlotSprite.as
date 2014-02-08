@@ -8,31 +8,35 @@ package
 		[Embed(source="../assets/slots2.png")] public static var slot2Img:Class;
 		[Embed(source="../assets/slots3.png")] public static var slot3Img:Class;
 		
-		private const minYPos:Number = -990;
-		private const maxYPos:Number = 990; 
+		private const minYPos:Number = -800;
+		private const maxYPos:Number = 190; 
 		private const individualHeight:Number = 110;
-		private const heightOffset:Number = 20;
-		private const minStoppingVelocity:Number = 40;
+		private const heightOffset:Number = 60;
+		private const minStoppingVelocity:Number = 10;
 		
 		private var images:Array = [slot1Img, slot2Img, slot3Img]; // use index
-		private var xOffset:Array = [75, 190, 330];
+		private var xOffset:Array = [75, 200, 330];
 		private var initialYOffset:Array = [-10, -300, -700];
 		public var isStopping:Boolean = false;
 		public var isClickable:Boolean = true;
 		
+		public var hasStopped:Boolean=false;
+		public var slotNum:Number;
+		
 		public function SlotSprite(slotNumber:Number)
 		{
 			super(xOffset[slotNumber], initialYOffset[slotNumber], images[slotNumber]);
+			slotNum=slotNumber;
 		}
 		
 		public function start():void {
-			this.maxVelocity.y = 200;
-			this.acceleration.y = 150;
+			this.maxVelocity.y = 400;
+			this.acceleration.y = 300;
 		}
 		
 		public function stop():void {
 			isStopping = true;
-			this.acceleration.y = -100;
+			this.acceleration.y = -350;
 		}
 		
 		override public function update():void {
@@ -41,7 +45,9 @@ package
 				if (this.velocity.y < minStoppingVelocity) {
 					this.acceleration.y = 0;
 					this.velocity.y = 0;
-					this.y = this.y - (this.y % individualHeight) + heightOffset;
+					var landedSlot=this.y-individualHeight/2;
+					this.y = landedSlot - (landedSlot % individualHeight) + heightOffset;
+					isStopping=false;
 				}
 			}
 			
