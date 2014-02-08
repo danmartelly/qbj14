@@ -11,6 +11,7 @@ package
 		public var dialogActive:Boolean = false;
 		public var successfulDialogs:Number = 0;
 		public var currentDialogIndex:Number = 0;
+		public var nextButton:FlxButton;
 		
 		override public function create():void
 		{
@@ -33,6 +34,16 @@ package
 			
 			// add an objective text
 			add(new FlxText(30, 30, 400, "Objective: Talk to the two queer people in the room"));
+			
+			// add button but hide it from view
+			nextButton = new FlxButton(400, 500, "Next", nextThing);
+			add(nextButton);
+			//nextButton.visible = false;
+			//nextButton.active = false;
+		}
+		
+		public function nextThing():void {
+			FlxG.switchState(new EndState());
 		}
 		
 		override public function update():void {
@@ -40,6 +51,8 @@ package
 			
 			if (successfulDialogs >= 4) {
 				dialog.text = "YOU TALKED TO ALL THE QUEER PEOPLE IN THE ROOM. YOU WIN!";
+				nextButton.visible = true;
+				nextButton.active = true;
 				return;
 			}
 			
