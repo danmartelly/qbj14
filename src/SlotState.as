@@ -47,6 +47,17 @@ package
 				//show the arrow
 			}
 			super.update();
+			var currentIndex:Number = 0;
+			for (var i:Number = 0; i < 3; i++) {
+				var s:SlotSprite = _slots[i];
+				if (s.slotStopped) {
+					currentIndex = i + 1;
+					break;
+				}
+			}
+			if (currentIndex > 3) currentIndex = 0;
+			
+			_slots[currentIndex].makeClickable(true);
 		}
 	}
 }

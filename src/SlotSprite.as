@@ -17,10 +17,10 @@ package
 		private var images:Array = [slot1Img, slot2Img, slot3Img]; // use index
 		private var xOffset:Array = [75, 200, 330];
 		private var initialYOffset:Array = [-10, -300, -700];
-		public var isStopping:Boolean = false;
-		public var isClickable:Boolean = true;
+		private var isStopping:Boolean = false;
+		public var slotStopped:Boolean = false;
+		private var isClickable:Boolean = false;
 		
-		public var hasStopped:Boolean=false;
 		public var slotNum:Number;
 		
 		public function SlotSprite(slotNumber:Number)
@@ -39,6 +39,10 @@ package
 			this.acceleration.y = -350;
 		}
 		
+		public function makeClickable(b:Boolean):void {
+			isClickable = b;
+		}
+		
 		override public function update():void {
 			if (isStopping) {
 				// When minStoppingVelocity hit, snap to place
@@ -48,6 +52,7 @@ package
 					var landedSlot=this.y-individualHeight/2;
 					this.y = landedSlot - (landedSlot % individualHeight) + heightOffset;
 					isStopping=false;
+					slotStopped = true;
 				}
 			}
 			
