@@ -36,10 +36,10 @@ package
 			add(new FlxText(30, 30, 400, "Objective: Talk to the two queer people in the room"));
 			
 			// add button but hide it from view
-			nextButton = new FlxButton(400, 500, "Next", nextThing);
+			nextButton = new FlxButton(400, 400, "Next", nextThing);
 			add(nextButton);
-			//nextButton.visible = false;
-			//nextButton.active = false;
+			nextButton.visible = false;
+			nextButton.active = false;
 		}
 		
 		public function nextThing():void {
@@ -53,6 +53,7 @@ package
 				dialog.text = "YOU TALKED TO ALL THE QUEER PEOPLE IN THE ROOM. YOU WIN!";
 				nextButton.visible = true;
 				nextButton.active = true;
+				FlxG.mouse.show();
 				return;
 			}
 			

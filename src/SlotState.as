@@ -17,7 +17,9 @@ package
 		public var isDone=false;
 		
 		private var initialXOffset:Number=75;
-		private var indivCellWidth:Number=130;
+		private var indivCellWidth:Number = 130;
+		
+		public var nextButton:FlxButton;
 		
 		override public function create():void
 		{
@@ -40,6 +42,16 @@ package
 			arrow = new FlxSprite(initialXOffset+40, 40, slotArrow);
 			add(arrow);
 			arrow.visible = false;
+			
+			// add button but hide it from view
+			nextButton = new FlxButton(400, 400, "Next", nextThing);
+			add(nextButton);
+			nextButton.visible = false;
+			nextButton.active = false;
+		}
+		
+		public function nextThing():void {
+			FlxG.switchState(new PeopleState());
 		}
 		
 		override public function update():void {
@@ -66,7 +78,7 @@ package
 					currentIndex = i + 1;
 				}
 			}
-			if (currentIndex > 3) {
+			if (currentIndex >= 3) {
 				currentIndex = 0;
 				isDone=true;
 			}
@@ -76,7 +88,9 @@ package
 				arrow.x=initialXOffset+40+currentIndex*indivCellWidth;
 			}else{
 				arrow.visible=false;
-				//trigger win state
+				nextButton.visible = true;
+				nextButton.active = true;
+				FlxG.mouse.show();
 			}
 			super.update();
 		}
