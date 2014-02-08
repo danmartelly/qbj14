@@ -4,6 +4,7 @@ package
 	
 	public class PeopleState extends FlxState
 	{
+		[Embed(source="../assets/AYearWithoutRain.ttf", fontName="RAIN", embedAsCFF="false")] protected var fontCookies:Class;
 		public var randos:FlxGroup;
 		public var activeRando:RandoSprite;
 		public var player:PlayerSprite;
@@ -29,14 +30,16 @@ package
 			add(player);
 			
 			//add text
-			dialog = new FlxText(30, 440, 400, 'test');
+			dialog = new FlxText(30, 400, 500, 'test');
 			add(dialog);
 			
 			// add an objective text
-			add(new FlxText(30, 30, 400, "Objective: Talk to the two queer people in the room"));
+			var Instructions:FlxText=new FlxText(30, 30, 500, "Objective: Talk to the two queer people in the room");
+			Instructions.setFormat("RAIN",20);
+			add(Instructions);
 			
 			// add button but hide it from view
-			nextButton = new FlxButton(400, 400, "Next", nextThing);
+			nextButton = new FlxButton(400, 350, "Next", nextThing);
 			add(nextButton);
 			nextButton.visible = false;
 			nextButton.active = false;
@@ -50,7 +53,8 @@ package
 			super.update();
 			
 			if (successfulDialogs >= 4) {
-				dialog.text = "YOU TALKED TO ALL THE QUEER PEOPLE IN THE ROOM. YOU WIN!";
+				dialog.text = "YOU TALKED TO ALL THE QUEER PEOPLE IN THE ROOM. \nYOU WIN!";
+				dialog.setFormat("RAIN",20);
 				nextButton.visible = true;
 				nextButton.active = true;
 				FlxG.mouse.show();
@@ -62,6 +66,7 @@ package
 				// just go through the dialog
 				if (currentDialogIndex < activeRando.dialogArray.length) {
 					dialog.text = activeRando.dialogArray[currentDialogIndex];
+					dialog.setFormat("RAIN",20);
 				} else {
 					dialogActive = false;
 					currentDialogIndex = 0;
@@ -80,8 +85,10 @@ package
 			if (FlxG.overlap(randos, player, initializeDialog)) {
 				if (activeRando.alreadyTalkedTo) {
 					dialog.text = "You have talked to this person today already.";
+					dialog.setFormat("RAIN",20);
 				} else {
 					dialog.text = "Press SPACE to talk to this person.";
+					dialog.setFormat("RAIN",20);
 					if (FlxG.keys.justPressed("E") || FlxG.keys.justPressed("SPACE")) {
 						activeRando.active = false; // freeze the rando in place
 						player.active = false; // and the player

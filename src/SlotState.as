@@ -4,6 +4,7 @@ package
 	
 	public class SlotState extends FlxState
 	{
+		[Embed(source="../assets/AYearWithoutRain.ttf", fontName="RAIN", embedAsCFF="false")] protected var fontCookies:Class;
 		[Embed(source="../assets/slotcover.png")] public static var slotCoverImg:Class;
 		[Embed(source="../assets/slotHandle.png")] public static var slotHandleImg:Class;
 		[Embed(source="../assets/slotHandle_alert.png")] public static var slotHandleAlert:Class;
@@ -13,6 +14,8 @@ package
 		public var foreground:FlxSprite;
 		public var handle:FlxSprite;
 		public var arrow:FlxSprite;
+		public var winMsg:FlxText;
+		public var Instructions:FlxText;
 		public var isSpinning:Boolean=false;
 		public var isDone=false;
 		
@@ -48,6 +51,15 @@ package
 			add(nextButton);
 			nextButton.visible = false;
 			nextButton.active = false;
+			
+			Instructions=new FlxText(70, 360, 500, "Get 3 things that fit together!");
+			Instructions.setFormat("RAIN",30);
+			add(Instructions);
+			
+			winMsg=new FlxText(70, 360, 500, "You win!!");
+			winMsg.setFormat("RAIN",30);
+			add(winMsg);
+			winMsg.visible=false;
 		}
 		
 		public function nextThing():void {
@@ -90,6 +102,8 @@ package
 				arrow.visible=false;
 				nextButton.visible = true;
 				nextButton.active = true;
+				winMsg.visible=true;
+				Instructions.visible=false;
 				FlxG.mouse.show();
 			}
 			super.update();
