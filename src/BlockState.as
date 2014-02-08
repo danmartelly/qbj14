@@ -4,9 +4,9 @@ package
 	
 	public class BlockState extends FlxState
 	{
-		public function BlockState()
+		override public function create():void
 		{
-			super();
+			
 		}
 	}
 }

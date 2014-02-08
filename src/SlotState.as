@@ -4,15 +4,27 @@ package
 	
 	public class SlotState extends FlxState
 	{
+		[Embed(source="../assets/slotcover.png")] public static var slotCoverImg:Class;
 		
+		public var _slots:Array = [];
+		public var foreground:FlxSprite;
 		
-		public var _slot1:SlotSprite;
-		
-		public function SlotState()
+		override public function create():void
 		{
-			_slot1 = new SlotSprite(1);
-			add(_slot1);
-			_slot1.start();
+			FlxG.mouse.show();
+			FlxG.bgColor = 0x0fffffff;
+			
+			
+			for (var i:Number = 0; i < 3; i++) {
+				var s:SlotSprite = new SlotSprite(i);
+				add(s);
+				s.start();
+				_slots.push(s);
+			}
+			
+			// foreground has to be added last
+			foreground = new FlxSprite(0, 0, slotCoverImg);
+			add(foreground);
 		}
 		
 		override public function update():void {

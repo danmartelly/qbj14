@@ -4,9 +4,9 @@ package
 	
 	public class PeopleState extends FlxState
 	{
-		public function PeopleState()
+		override public function create():void
 		{
-			super();
+
 		}
 	}
 }
